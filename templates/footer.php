@@ -1,0 +1,11 @@
+<script src="..\public\vendor\MaterialBootstrap\js\jquery-3.4.1.min.js"></script>
+<script src="..\public\vendor\MaterialBootstrap\js\popper.min.js"></script>
+<script src="..\public\vendor\MaterialBootstrap\js\bootstrap.min.js"></script>
+<script src="..\public\vendor\MaterialBootstrap\js\mdb.min.js"></script>
+<script src="..\public\vendor\MaterialBootstrap\js\addons\datatables.js"></script>
+<script src="..\public\vendor\MaterialBootstrap\js\jquery.mask.min.js"></script>
+<script src="..\public\vendor\SweetAlert2\dist\sweetalert2.all.min.js"></script>
+<script src="..\public\js\datepicker_sett.js"></script>
+<script src="..\public\js\moment.js"></script>
+<script src="..\public\js\transaksi.js"></script>
+<script src="..\public\js\script.js"></script>
