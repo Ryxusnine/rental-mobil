@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-28 09:04:13
+Date: 2020-02-12 09:20:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -77,7 +77,7 @@ CREATE TABLE `sopir` (
   `TarifPerhari` double(10,0) NOT NULL,
   `StatusSopir` enum('Riding','Free','Booked') NOT NULL,
   PRIMARY KEY (`IdSopir`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of sopir
@@ -87,6 +87,7 @@ INSERT INTO `sopir` VALUES ('9', 'Muh Atma Nugraha', 'Kantor Transmigrasi', '089
 INSERT INTO `sopir` VALUES ('10', 'Sahrul Bintang', 'Batua', '08198765432', '73712348080', '300000', 'Free');
 INSERT INTO `sopir` VALUES ('11', 'Dominic Toretto', 'Makassar', '087800517800', '73756788080', '550000', 'Free');
 INSERT INTO `sopir` VALUES ('12', 'Hobs', 'Makassar', '08987654321', '73710108888', '225000', 'Free');
+INSERT INTO `sopir` VALUES ('13', 'Anu', 'Asrama Haji', '077634567890', '345XF733', '1000000', 'Free');
 
 -- ----------------------------
 -- Table structure for `transaksi`
@@ -145,6 +146,7 @@ CREATE TABLE `type` (
 -- ----------------------------
 INSERT INTO `type` VALUES ('', '', 'Pilih Kode Merk');
 INSERT INTO `type` VALUES ('AGY', 'Agya', 'TYT');
+INSERT INTO `type` VALUES ('CRV', 'CR-V', 'HND');
 INSERT INTO `type` VALUES ('FTNR', 'Fortuner', 'MTSHB');
 INSERT INTO `type` VALUES ('PNTR', 'Phanter LS', 'ISZ');
 INSERT INTO `type` VALUES ('SAPV', 'Apv Arena', 'SZK');
