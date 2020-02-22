@@ -4,52 +4,53 @@ include '../controller/koneksi.php';
 if (isset($_POST['editKaryawan'])) {
 
    function upload()
-   {
-      $namaFile = $_FILES['FotoKaryawan']['name'];
-      $ukuranFile = $_FILES['FotoKaryawan']['size'];
-      $error = $_FILES['FotoKaryawan']['error'];
-      $tmpName = $_FILES['FotoKaryawan']['tmp_name'];
+{
+   $namaFile = $_FILES['FotoKaryawan']['name'];
+   $ukuranFile = $_FILES['FotoKaryawan']['size'];
+   $error = $_FILES['FotoKaryawan']['error'];
+   $tmpName = $_FILES['FotoKaryawan']['tmp_name'];
 
-      //Cek apakah gambar tidak di upload
-      if ($error === 4) {
-         echo "<script>
+   //Cek apakah gambar tidak di upload
+   if ($error === 4) {
+      echo "<script>
       alert ('Pilih gambar terlebih dahulu!');document.location='../view/v_karyawan.php';
       </script>";
-         return false;
-      }
-      //Cek ekstensi file
-      $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
-      $ekstensiGambar = explode('.', $namaFile);
-      $ekstensiGambar = strtolower(end($ekstensiGambar));
+      return false;
+   }
+   //Cek ekstensi file
+   $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+   $ekstensiGambar = explode('.', $namaFile);
+   $ekstensiGambar = strtolower(end($ekstensiGambar));
 
-      if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
-         echo "<script>
+   if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+      echo "<script>
       alert ('Yang Anda Upload Bukan Gambar!');document.location='../view/v_karyawan.php';
       </script>";
-         return false;
-      }
+      return false;
+   }
 
-      //cek jka ukurannYa terlalu besar
-      if ($ukuranFile > 1000000) {
-         echo "<script>
+   //cek jka ukurannYa terlalu besar
+   if ($ukuranFile > 1000000) {
+      echo "<script>
       alert ('Ukuran gambar terlalu besar!');document.location='../view/v_karyawan.php';
       </script>";
-         return false;
-      }
-
-      $namaFileBaru = 'FotoKaryawan-';
-      $namaFileBaru .= time();
-      $namaFileBaru .= '-' . date('d-M-Y');
-      $namaFileBaru .= '.';
-      $namaFileBaru .= $ekstensiGambar;
-
-      //lolos pengecekan
-      move_uploaded_file($tmpName, '../public/img/fotokaryawan/' . $namaFileBaru);
-      return $namaFileBaru;
+      return false;
    }
+
+   $namaFileBaru = 'FotoKaryawan-';
+   $namaFileBaru .= time();
+   $namaFileBaru .= '-' . date('d-M-Y');
+   $namaFileBaru .= '.';
+   $namaFileBaru .= $ekstensiGambar;
+
+   //lolos pengecekan
+   move_uploaded_file($tmpName, '../public/img/fotokaryawan/' . $namaFileBaru);
+   return $namaFileBaru;
+}
    //____________________________________________________________________
    $nik  = $_POST['NIK'];
    $nm   = $_POST['nm'];
+   $nmu  = $_POST['nmu'];
    $ps   = md5($_POST['ps']);
    $jk = $_POST['jk'];
    $almt = $_POST['almt'];

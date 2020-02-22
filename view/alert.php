@@ -17,5 +17,8 @@
       if (isset($_GET['ambil'])) {
          echo '<script>Swal.fire("Kendaraan Diambil","Kendaraan Siap Digunakan","success")</script>';
       }
+      if (isset($_GET['selesai'])) {
+         echo '<script>Swal.fire("Rental Selesai","Terima Kasih Telah Menggunakan Jasa Kami","success")</script>';
+      }
       ?>
  </div>

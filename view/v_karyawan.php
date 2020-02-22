@@ -24,7 +24,7 @@ include('../controller/koneksi.php');
 
       <div class="isiform bg-white mt-4 shadow-sm">
          <!-- Modal Untuk menginput Data -->
-         <?php if ($_SESSION['Login']['Posisi'] == 2) : ?>
+         <?php if ($_SESSION['Login']['Posisi'] == 2 or $_SESSION['Login']['Posisi'] == 3) : ?>
 
          <?php elseif ($_SESSION['Login']['Posisi'] == 1) : ?>
             <button type="button" name="tambahPelanggan" class="btn btn-primary shadow-none rounded-pill" data-toggle="modal" data-target="#ModalTambahData"> <i class="fas fa-fw fa-plus-square"></i> <b>Data Karyawan</b></button>
@@ -57,7 +57,7 @@ include('../controller/koneksi.php');
 
                         <div class="md-form">
                            <label for="p">Password</label>
-                           <input type="text" name="password" id="p" class="form-control"></div>
+                           <input type="password" name="password" id="p" class="form-control"></div>
 
                         <div class="form-group">
                            <label>Jenis Kelamin</label>
@@ -131,7 +131,7 @@ include('../controller/koneksi.php');
                               <a href="#" data-toggle="modal" data-target="#editK<?php echo $a ?>" class="btn btn-primary btn-sm shadow-none"><i class="fas fa-fw fa-edit"></i></a>
                               <a href="../functions/h_karyawan.php?NIK=<?= $row['NIK'] ?>" class="tombol-hapus btn btn-danger btn-sm shadow-none"><i class="fas fa-fw fa-Trash"></i></a>
                               <a href="#" data-toggle="modal" data-target="#DetailKaryawan<?php echo $a ?>" class="btn btn-info btn-sm shadow-none"><i class="fas fa-fw fa-user"></i></a>
-                           <?php elseif ($_SESSION['Login']['Posisi'] == 2) : ?>
+                           <?php elseif ($_SESSION['Login']['Posisi'] == 2 OR $_SESSION['Login']['Posisi']==3) : ?>
                               <a href="#" data-toggle="modal" data-target="#DetailKaryawan<?php echo $a ?>" class="btn btn-info btn-sm shadow-none"><i class="fas fa-fw fa-user"></i></a>
                            <?php endif; ?>
                         </td>
@@ -179,12 +179,11 @@ include('../controller/koneksi.php');
                                        <?= $row['telepon'] ?>
                                     </li>
                                     <li class="list-group-item py-4 bg-transparent text-dark">
-                                       <i class="fa fa-
-                                       <?php if ($row['JenisKelamin'] == 'L') {
-                                             echo 'male';
-                                          } else {
-                                             echo 'female';
-                                          } ?> fa-fw">
+                                       <i class="fa fa-<?php if ($row['JenisKelamin'] == 'L') {
+                                                            echo 'male';
+                                                         } else {
+                                                            echo 'female';
+                                                         } ?> fa-fw">
                                        </i>
                                        <?php if ($row['JenisKelamin'] == 'L') {
                                              echo 'Laki-laki';

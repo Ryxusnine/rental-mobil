@@ -24,8 +24,10 @@ include('../controller/koneksi.php');
 
       <!-- Modal Untuk menginput Data -->
       <div class="isiform bg-white mt-4 shadow-sm">
+      <?php if ($_SESSION['Login']['Posisi']==3) :?>
+      <?php elseif ($_SESSION['Login']['Posisi']== 1 OR $_SESSION['Login']['Posisi']==2) :?>
          <button type="button" name="tambahPelanggan" class="btn btn-primary rounded-pill shadow-none" data-toggle="modal" data-target="#ModalTambahData"> <i class="fas fa-fw fa-plus-square"></i><b>Data Pelanggan</b></button>
-
+<?php endif; ?>
          <div class="modal fade" id="ModalTambahData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-notify modal-primary" role="document">
                <div class="modal-content">
@@ -53,7 +55,7 @@ include('../controller/koneksi.php');
 
                         <div class="md-form">
                            <label>Password</label>
-                           <input type="text" name="password" class="form-control"></div>
+                           <input type="password" name="password" class="form-control"></div>
 
                         <div class="form-group">
                            <label>Jenis Kelamin</label>
@@ -120,9 +122,13 @@ include('../controller/koneksi.php');
                         <td class="align-middle"><?php echo $row['nama']; ?></td>
                         <td class="align-middle"><?php echo $row['telepon']; ?></td>
                         <td>
+                        <?php if ($_SESSION['Login']['Posisi']== 1 OR $_SESSION['Login']['Posisi']==2) :?>
                            <a href="#" data-toggle="modal" data-target="#editP<?php echo $a ?>" class="btn btn-primary btn-sm shadow-none"><i class="fas fa-fw fa-edit"></i></a>
                            <a href="../functions/h_pelanggan.php?NIK=<?= $row['NIK'] ?>" class="tombol-hapus btn btn-danger btn-sm shadow-none"><i class="fas fa-fw fa-Trash"></i></a>
                            <a href="#" data-toggle="modal" data-target="#DetailP<?php echo $a ?>" class="btn btn-info btn-sm shadow-none"><i class="fas fa-fw fa-user"></i></a>
+                           <?php elseif ($_SESSION['Login']['Posisi']== 3) :?>
+                           <a href="#" data-toggle="modal" data-target="#DetailP<?php echo $a ?>" class="btn btn-info btn-sm shadow-none"><i class="fas fa-fw fa-user"></i></a>
+                  <?php endif;?>
                         </td>
                      </tr>
                      <!-- Modals Edit -->

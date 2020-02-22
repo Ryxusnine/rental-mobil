@@ -12,7 +12,10 @@ include('../controller/koneksi.php');
    ?>
    <div class="container">
       <div class="bawah-navbar bg-white mt-4 shadow-sm p-2">
-         <button type="button" name="tambahSopir" class="float-right btn btn-custom btn-sm shadow-none rounded mt-1" data-toggle="modal" data-target="#ModalTambahData"> <i class="fas fa-fw fa-plus-square fa-2x"></i> </button>
+         <?php if ($_SESSION['Login']['Posisi'] == 3) : ?>
+         <?php elseif ($_SESSION['Login']['Posisi'] == 1 or $_SESSION['Login']['Posisi'] == 2) : ?>
+            <button type="button" name="tambahSopir" class="float-right btn btn-custom btn-sm shadow-none rounded mt-1" data-toggle="modal" data-target="#ModalTambahData"> <i class="fas fa-fw fa-plus-square fa-2x"></i> </button>
+         <?php endif; ?>
          <h4 class="h4 mt-2 ml-2">DATA SOPIR</h4>
       </div>
 
@@ -77,7 +80,10 @@ include('../controller/koneksi.php');
                   <th>Telepon</th>
                   <th>No. Sim</th>
                   <th>Tarif/hari</th>
-                  <th>Action</th>
+                  <?php if ($_SESSION['Login']['Posisi'] == 3) : ?>
+                  <?php elseif ($_SESSION['Login']['Posisi'] == 1 or $_SESSION['Login']['Posisi'] == 2) : ?>
+                     <th>Action</th>
+                  <?php endif; ?>
                </thead>
                <tbody>
                   <?php
@@ -86,33 +92,36 @@ include('../controller/koneksi.php');
                   $query = mysqli_query($konekdb, "SELECT * from sopir WHERE IdSopir != 8");
                   $a = 1;
                   while ($row = mysqli_fetch_array($query)) {
-                     ?>
+                  ?>
                      <tr class="text-center">
                         <td><?php echo $a++; ?></td>
                         <td><?php echo $row['IdSopir']; ?></td>
                         <td><?php echo $row['NmSopir']; ?>
                            <div class="badge <?php
-                                                if ($row['StatusSopir'] == 'Free')
-                                                   echo 'badge-primary';
-                                                else if ($row['StatusSopir'] == 'Booked')
-                                                   echo 'badge-success';
-                                                else if ($row['StatusSopir'] == 'Riding')
-                                                   echo 'badge-Danger';
-                                                ?> shadow-none"> <?= $row['StatusSopir'] ?></div>
+                                             if ($row['StatusSopir'] == 'Free')
+                                                echo 'badge-primary';
+                                             else if ($row['StatusSopir'] == 'Booked')
+                                                echo 'badge-success';
+                                             else if ($row['StatusSopir'] == 'Riding')
+                                                echo 'badge-Danger';
+                                             ?> shadow-none"> <?= $row['StatusSopir'] ?></div>
                         </td>
                         <td><?php echo $row['alamat']; ?></td>
                         <td><?php echo $row['telepon']; ?></td>
                         <td><?php echo $row['NoSim']; ?></td>
                         <td><?php echo 'Rp.' . $row['TarifPerhari']; ?></td>
-                        <td>
-                           <a href="#" data-toggle="modal" data-target="#updtSpr<?php echo $a ?>" class="btn btn-primary btn-sm shadow-none"><i class="fas fa-fw fa-edit"></i></a>
-                           <a href="../functions/h_sopir.php?IdSopir=<?= $row['IdSopir'] ?>" class="btn btn-danger btn-sm shadow-none tombol-hapus"><i class="fas fa-fw fa-Trash"></i></a>
-                        </td>
+                        <?php if ($_SESSION['Login']['Posisi'] == 3) : ?>
+                        <?php elseif ($_SESSION['Login']['Posisi'] == 1 or $_SESSION['Login']['Posisi'] == 2) : ?>
+                           <td>
+                              <a href="#" data-toggle="modal" data-target="#updtSpr<?php echo $a ?>" class="btn btn-primary btn-sm shadow-none"><i class="fas fa-fw fa-edit"></i></a>
+                              <a href="../functions/h_sopir.php?IdSopir=<?= $row['IdSopir'] ?>" class="btn btn-danger btn-sm shadow-none tombol-hapus"><i class="fas fa-fw fa-Trash"></i></a>
+                           </td>
+                        <?php endif; ?>
                      </tr>
                      <!-- Modals Edit -->
                      <?php
-                        include '../modals/m_sopir.php';
-                        ?>
+                     include '../modals/m_sopir.php';
+                     ?>
 
                   <?php
                   }

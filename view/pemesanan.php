@@ -15,9 +15,14 @@ include('../controller/koneksi.php');
       <div class="bawah-navbar bg-white mt-4 shadow-sm p-2 p-2">
          <div class="panel panel-default">
             <div class="panel-heading">
-               <a href="../view/arsip" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0" style="background:grey">Transaksi Dibatalakan</a>
-               <a href="../view/transaksi" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0" style="background:grey">Transaksi Selesai</a>
-               <a href="../view/pemesanan" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0">Pemesanan</a>
+               <?php if ($_SESSION['Login']['Posisi'] == 3) : ?>
+                  <a href="../view/arsip" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0" style="background:grey">Transaksi Dibatalakan</a>
+                  <a href="../view/transaksi" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0" style="background:grey">Transaksi Selesai</a>
+               <?php elseif ($_SESSION['Login']['Posisi'] == 1 or $_SESSION['Login']['Posisi'] == 2) : ?>
+                  <a href="../view/arsip" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0" style="background:grey">Transaksi Dibatalakan</a>
+                  <a href="../view/transaksi" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0" style="background:grey">Transaksi Selesai</a>
+                  <a href="../view/pemesanan" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0">Pemesanan</a>
+               <?php endif; ?>
                <h4 class="h4 mt-2 ml-2">DATA PEMESANAN</h4>
             </div>
          </div>
@@ -183,24 +188,28 @@ include('../controller/koneksi.php');
                <tbody>
                   <?php
                   include('../controller/koneksi.php');
-
-                  $query = mysqli_query($konekdb, "SELECT * from view_transaksi WHERE StatusTransaksi != 'Batal' AND StatusTransaksi != 'Selesai'");
+                  if ($_SESSION['Login']['Posisi'] == 3) :
+                     $NIK = $_SESSION['Login']['NIK'];
+                     $query = mysqli_query($konekdb, "SELECT * from view_transaksi WHERE StatusTransaksi != 'Batal' AND StatusTransaksi != 'Selesai' AND NIK ='$NIK'");
+                  elseif ($_SESSION['Login']['Posisi'] == 1 or $_SESSION['Login']['Posisi'] == 2) :
+                     $query = mysqli_query($konekdb, "SELECT * from view_transaksi WHERE StatusTransaksi != 'Batal' AND StatusTransaksi != 'Selesai'");
+                  endif;
                   $a = 1;
                   while ($row = mysqli_fetch_array($query)) {
-                     ?>
+                  ?>
                      <tr class="text-center">
                         <td class="align-middle"><?php echo $a++; ?></td>
                         <td class="align-middle"><?php echo $row['NoTransaksi']; ?>
                            <div class="badge <?php
-                                                if ($row['StatusTransaksi'] == 'Proses')
-                                                   echo 'badge-primary';
-                                                else if ($row['StatusTransaksi'] == 'Batal')
-                                                   echo 'badge-danger';
-                                                else if ($row['StatusTransaksi'] == 'Mulai')
-                                                   echo 'badge-warning';
-                                                else if ($row['StatusTransaksi'] == 'Selesai')
-                                                   echo 'badge-success';
-                                                ?> shadow-none"> <?= $row['StatusTransaksi'] ?></div>
+                                             if ($row['StatusTransaksi'] == 'Proses')
+                                                echo 'badge-primary';
+                                             else if ($row['StatusTransaksi'] == 'Batal')
+                                                echo 'badge-danger';
+                                             else if ($row['StatusTransaksi'] == 'Mulai')
+                                                echo 'badge-warning';
+                                             else if ($row['StatusTransaksi'] == 'Selesai')
+                                                echo 'badge-success';
+                                             ?> shadow-none"> <?= $row['StatusTransaksi'] ?></div>
                         </td>
                         <td class="align-middle"><?php echo $row['nama']; ?></td>
                         <td class="align-middle"><span class="badge badge-info p-2 shadow-none">[ <?php echo $row['NoPlat']; ?> ] </span>

@@ -24,7 +24,10 @@ include('../controller/koneksi.php');
 
       <div class="isiform bg-white mt-4 shadow-sm mb-5">
          <!-- Modal Untuk menginput Data -->
+         <?php if ($_SESSION['Login']['Posisi']==3):?>
+         <?php elseif ($_SESSION['Login']['Posisi']==1 OR $_SESSION['Login']['Posisi']==2):?>
          <button type="button" name="tambahKen" class="Shadow-none btn btn-primary rounded-pill" data-toggle="modal" data-target="#ModalTambahData"><i class="fas fa-fw fa-plus-square"></i><b>Kendaraan</b></button>
+<?php endif;?>
 
          <div class="modal fade" id="ModalTambahData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-notify modal-primary" role="document">
@@ -108,7 +111,10 @@ include('../controller/koneksi.php');
                   <th>Status Rental</th>
                   <th>Harga Sewa</th>
                   <th>Foto Mobil</th>
+                  <?php if ($_SESSION['Login']['Posisi']==3):?>
+                  <?php elseif ($_SESSION['Login']['Posisi']==1 OR $_SESSION['Login']['Posisi']==2):?>
                   <th>Action</th>
+                                    <?php endif;?>
                </thead>
                <tbody>
                   <?php
@@ -136,8 +142,11 @@ include('../controller/koneksi.php');
                         <td class="align-middle"><?php echo 'Rp.' . $row['HargaSewa']; ?></td>
                         <td class="align-middle"><img class="img-thumbnail" width="100" src="https://localhost/RentalMobil/public/img/fotomobil/<?= $row['FotoMobil']; ?>"></td>
                         <td class="align-middle">
+                        <?php if ($_SESSION['Login']['Posisi']==3):?>
+                        <?php elseif ($_SESSION['Login']['Posisi']==1 OR $_SESSION['Login']['Posisi']==2):?>
                            <a href="#" data-toggle="modal" data-target="#editKen<?php echo $a ?>" class="Shadow-none btn btn-primary "><i class="fas fa-fw fa-edit"></i></a>
                            <a href="..\functions\h_kendaraan.php?IdKendaraan=<?= $row['IdKendaraan']; ?>" class="Shadow-none btn btn-danger tombol-hapus"> <i class="fas fa-fw fa-Trash"></i></a>
+                  <?php endif;?>
                         </td>
                      </tr>
                      <!-- Modals Edit -->

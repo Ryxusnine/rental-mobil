@@ -1,5 +1,13 @@
-<?php
-include '../controller/koneksi.php';
-$nik = $_GET['NIK'];
-$h = mysqli_query($konekdb, "delete from users where NIK = '$nik'");
-echo '<script>document.location="../view/v_pelanggan.php?sukses"</script>';
+<?php 
+include "../controller/koneksi.php";
+$NIK = $_GET['NIK'];
+$prekotes = mysqli_query($konekdb,"SELECT * FROM users Where NIK = '$NIK'");
+$has  = mysqli_fetch_array($prekotes);
+$nama = $has['Foto'];
+$tempat = "../public/img/fotopelanggan/" . $nama;
+
+unlink($tempat);
+
+$h = mysqli_query($konekdb, "DELETE FROM users WHERE NIK = '$NIK'");
+header("location:../view/v_pelanggan.php");
+?>

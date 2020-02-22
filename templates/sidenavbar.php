@@ -26,7 +26,7 @@ session_start()
       <div class="col-md-2">
          <div class="vertical">
             <!-- Sidebar -->
-            <ul class="purple darken-4">
+            <ul class="bg-primary">
                <br>
 
                <?php if ($_SESSION['Login']['Posisi'] == 1) : ?>
@@ -40,13 +40,17 @@ session_start()
                <span class="navbar-text text-white text-center mb-3">
                   Selamat Datang, <br> <span class="badge badge-warning p-2 shadow-none" style="color:black!important; font-size:12px"><?= $_SESSION['Login']['nama_user'] ?>
                   </span></span>
-
-               <li><a href="../index"><i class="fas fa-home"></i> Halaman Utama</a></li>
+               <li><a href="../view/pesankendaraan"><i class="fas fa-home"></i> Halaman Utama</a></li>
+              
                <li><a href="../view/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                <li><a href="../view/v_kendaraan"><i class="fas fa-car"></i> Data Kendaraan</a></li>
                <li><a href="../view/v_karyawan"><i class="fas fa-user"></i> Data Akun</a></li>
                <li><a href="../view/v_sopir"><i class="fas fa-user-tie"></i> Data Sopir</a></li>
+               <?php if($_SESSION['Login']['Posisi']==3):?>
+               <li><a href="../view/transaksi"><i class="fas fa-donate"></i> Transaksi</a></li>
+               <?php elseif($_SESSION['Login']['Posisi']==1 OR $_SESSION['Login']['Posisi']==2):?>
                <li><a href="../view/pemesanan"><i class="fas fa-donate"></i> Transaksi</a></li>
+<?php endif;?>
 
                <a href="../controller/logout.php" class="tombol-logout text-white shadow rounded-pill mb-4 waves-effect waves-light text-center"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </ul>

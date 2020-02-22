@@ -26,7 +26,9 @@ include('../controller/koneksi.php');
    <div class="container">
       <div class="bg-white rounded p-5 mt-3">
          <center>
-            <h3 class="h3 mb-3">Mutiara Rental Mobil</h3>
+            <h3 class="h3 mb-3">CETAK LAPORAN</h3>
+            <p> <b> Mutiara Rental Car</b> <br>Jalan BTP Blok AD No.202</p>
+            
          </center>
          <?php
          $NTR = $_GET['NTR'];

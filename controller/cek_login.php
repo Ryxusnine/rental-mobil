@@ -21,7 +21,7 @@ if ($cek > 0) {
     if ($_SESSION['Login']['Posisi'] == 1 or $_SESSION['Login']['Posisi'] == 2) {
         header("location:../view/dashboard");
     } else if ($_SESSION['Login']['Posisi'] == 3) {
-        header("location:../view/pelanggan/dashboard");
+        header("location:../view/dashboard");
     }
 } else {
     echo '<script>alert("MAAF PASSWORD ANDA SALAH");document.location="../index.php";</script>';

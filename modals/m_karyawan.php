@@ -26,7 +26,7 @@
 
                <div class="form-group">
                   <label>Password</label>
-                  <input class="form-control" type="text" name="ps"></div>
+                  <input class="form-control" type="password" name="ps"></div>
 
                <div class="form-group">
                   <label>Jenis Kelamin</label>

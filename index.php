@@ -35,12 +35,11 @@
     }
     ?>
 
-    <?php ?>
     <!-- Material form login -->
     <div class="iniferomna">
         <div class="card kartu">
-            <h5 class="card-header info-color white-text text-center py-4">
-                <strong>Sign in</strong>
+            <h5 class="card-header warning-color white-text text-center py-4">
+                <strong><B>LOGIN</B></strong>
             </h5>
             <div class="card-body px-lg-5 pt-5">
                 <form method="POST" action="controller/cek_login.php">
@@ -54,7 +53,7 @@
                         <input type="password" id="materialLoginFormPassword" class="form-control" name="password">
                         <label for="materialLoginFormPassword">Password</label>
                     </div>
-                    <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
+                    <button class="btn btn-outline-warning btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">LOGIN</button>
                     <center>
                         <p>Not a member?
                             <a href="#">Register</a>
@@ -63,8 +62,6 @@
                     </center>
                 </form>
             </div>
-            <center>
-            </center>
         </div>
     </div>
 </body>

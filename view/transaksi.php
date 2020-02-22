@@ -15,9 +15,14 @@ include('../controller/koneksi.php');
       <div class="bawah-navbar bg-white mt-4 shadow-sm p-2">
          <div class="panel panel-default">
             <div class="panel-heading">
+            <?php if($_SESSION['Login']['Posisi']==3):?>
+               <a href="../view/arsip" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0" style="background:grey">Transaksi Dibatalakan</a>
+               <a href="../view/transaksi" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0">Transaksi Selesai</a>
+               <?php elseif($_SESSION['Login']['Posisi']==1 OR $_SESSION['Login']['Posisi']==2):?>
                <a href="../view/arsip" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0" style="background:grey">Transaksi Dibatalakan</a>
                <a href="../view/transaksi" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0">Transaksi Selesai</a>
                <a href="../view/pemesanan" class="rounded-pill float-right btn btn-custom btn-sm shadow-none mt-0" style="background:grey">Pemesanan</a>
+<?php endif;?>
                <h4 class="h4 mt-2 ml-2">DATA TRANSAKSI SELESAI</h4>
             </div>
          </div>
@@ -42,9 +47,13 @@ include('../controller/koneksi.php');
                <tbody>
                   <?php
                   include('../controller/koneksi.php');
-
-                  $query = mysqli_query($konekdb, "SELECT * from view_transaksi WHERE StatusTransaksi = 'Selesai'");
-                  $a = 1;
+                  if($_SESSION['Login']['Posisi']==3) :
+                     $NIK = $_SESSION['Login']['NIK'];
+                     $query = mysqli_query($konekdb, "SELECT * from view_transaksi WHERE StatusTransaksi = 'Selesai' AND NIK ='$NIK'");
+                     elseif ($_SESSION['Login']['Posisi']==1 OR $_SESSION['Login']['Posisi']==2) :
+                        $query = mysqli_query($konekdb, "SELECT * from view_transaksi WHERE StatusTransaksi = 'Selesai'");
+                     endif;
+                                   $a = 1;
                   while ($row = mysqli_fetch_array($query)) {
                      ?>
                      <tr class="text-center">

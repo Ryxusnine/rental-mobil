@@ -1,7 +1,5 @@
-<?php
-
-include("../controller/koneksi.php");
-
+<?php 
+include '../controller/koneksi.php';
 function upload()
 {
    $namaFile = $_FILES['FotoMobil']['name'];
@@ -46,18 +44,15 @@ function upload()
    move_uploaded_file($tmpName, '../public/img/fotomobil/' . $namaFileBaru);
    return $namaFileBaru;
 }
-
 $fotomobil = upload();
 if (!$fotomobil) {
    return false;
 }
+$npl =$_POST['nopol'];
+$km =$_POST['KdMerk'];
+$it =$_POST['IdType'];
+$hs =$_POST['HargaSewa'];
 
-$npl = $_POST['nopol'];
-$km  = $_POST['KdMerk'];
-$it  = $_POST['IdType'];
-$sr  = $_POST['StatusRental'];
-$hs  = $_POST['HargaSewa'];
-
-
-$hasil = mysqli_query($konekdb, "insert into kendaraan values('','$npl','$km','$it','Kosong','$hs','$fotomobil')");
-header('Location: ../view/v_kendaraan.php?sukses_add');
+$hasil = mysqli_query($konekdb,"INSERT INTO kendaraan values('','$npl','$km','$it','Kosong','$hs','$fotomobil')");
+header("location:../view/v_kendaraan.php?sukses_add");
+?>

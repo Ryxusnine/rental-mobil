@@ -21,8 +21,44 @@ include('../controller/koneksi.php');
             </div>
          </div>
       </div>
+      <?php if ($_SESSION['Login']['Posisi']==3):?>
+      <div class="isiform bg-white mt-4 shadow-sm mb-5">
+               <?php
+               include 'alert.php'
+               ?>
+               <table id="dtbl" class="table table-hover mt-2">
+                  <thead class="text-center" color:white;">
+                     <th>No.</th>
+                     <th>Id Type</th>
+                     <th>Nama Type</th>
+                     <th>Kode Merk</th>
+                  </thead>
+                  <tbody>
+                     <?php
+                     include('../controller/koneksi.php');
 
+                     $query = mysqli_query($konekdb, "select * from view_type");
+                     $a = 1;
+                     while ($row = mysqli_fetch_array($query)) {
+                     ?>
+                        <tr class="text-center">
+                           <td><?php echo $a++; ?></td>
+                           <td><?php echo $row['IdType']; ?></td>
+                           <td><?php echo $row['NmType']; ?></td>
+                           <td><?php echo $row['KdMerk']; ?></td>
+                                                  </tr>
+                        <!-- Modals Edit -->
+                        <?php
+                        include '../modals/m_type.php'
+                        ?>
 
+                     <?php
+                     }
+                     ?>
+                  </tbody>
+               </table>
+            </div>
+      <?php elseif ($_SESSION['Login']['Posisi']==1 OR $_SESSION['Login']['Posisi']==2):?>
       <div class="row">
          <div class="col-9">
             <div class="isiform bg-white mt-4 shadow-sm mb-5">
@@ -70,7 +106,7 @@ include('../controller/koneksi.php');
 
          <div class="col-3">
             <div class="card-body mt-1">
-               <div class="text-white purple darken-4 rounded shadow-sm">
+               <div class="text-white bg-primary rounded shadow-sm">
                   <div class="card-header">
                      <h6 class="card-title text-center font-weight-bold mt-2 ">Tambah Data Type</h6>
                   </div>
@@ -99,7 +135,7 @@ include('../controller/koneksi.php');
                            </select>
                         </div>
 
-                        <button type="submit" name="AddType" class="btn btn-outline-secondary rounded-pill shadow-none btn-block waves-effect">Tambah</button>
+                        <button type="submit" name="AddType" class="btn btn-outline-primary rounded-pill shadow-none btn-block waves-effect">Tambah</button>
 
                      </form>
                   </div>
@@ -110,6 +146,7 @@ include('../controller/koneksi.php');
    </div>
 
    <?php include '../templates/footer.php' ?>
+                           <?php endif;?>
 </body>
 
 
